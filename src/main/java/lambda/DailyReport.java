@@ -8,7 +8,7 @@ import java.util.List;
 import com.amazonaws.services.lambda.runtime.Context;
 import com.amazonaws.services.lambda.runtime.LambdaLogger;
 
-public class Relatorio {
+public class DailyReport {
 
     private String createdAt;
     private double totalBilled = 0;
@@ -23,13 +23,13 @@ public class Relatorio {
     private double inputSagrima;
 
 
-    public Relatorio(){
+    public DailyReport(){
         // empty
     }
 
-    public Relatorio(String createdAt, double totalBilled, double totalSold, double weightBilled, double inputAnderson,
-                     double inputEmpresa, double inputBoaIdeia, double inputFerronato, double inputJuliana,
-                     double inputMaxel, double inputSagrima) {
+    public DailyReport(String createdAt, double totalBilled, double totalSold, double weightBilled, double inputAnderson,
+                       double inputEmpresa, double inputBoaIdeia, double inputFerronato, double inputJuliana,
+                       double inputMaxel, double inputSagrima) {
 
         this.createdAt = createdAt;
         this.totalBilled = totalBilled;
