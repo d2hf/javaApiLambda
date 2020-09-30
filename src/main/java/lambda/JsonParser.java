@@ -9,11 +9,11 @@ public class JsonParser {
         // empty
     }
 
-    public Relatorio parseReportBody(String body){
+    public DailyReport parseReportBody(String body){
         // creates gson object
         // interprets jsonObject to desired class object
 
         Gson gson = new GsonBuilder().setPrettyPrinting().setDateFormat("dd-MM-yyyy").create();
-        return gson.fromJson(body, Relatorio.class);
+        return gson.fromJson(body, DailyReport.class);
     }
 }

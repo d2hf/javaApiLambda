@@ -10,7 +10,7 @@ public class DBQueryer {
 
     }
 
-    public void persistRelatorioFullJson(Connection c, Relatorio r) {
+    public void persistRelatorioFullJson(Connection c, DailyReport r) {
         /*
         PreparedStatement Performance
 
@@ -68,42 +68,43 @@ public class DBQueryer {
         }
     }
 
-    public List<Relatorio> getMonthData(Connection c, int year, int month) throws SQLException {
-        String query = "SELECT * FROM tabela_full WHERE EXTRACT(MONTH FROM created_at)= ?" +
+    public List<DailyReport> getMonthData(Connection c, int year, int month) throws SQLException {
+        String dailyReportsQuery = "SELECT * FROM tabela_full WHERE EXTRACT(MONTH FROM created_at)= ?" +
                 " AND EXTRACT(YEAR FROM created_at) = ?";
-
-        PreparedStatement preparedStatement = c.prepareStatement(query);
-        List<Relatorio> rows = new ArrayList<>();
+        PreparedStatement dailyReportsPreparedStatement = c.prepareStatement(dailyReportsQuery);
+        List<DailyReport> dailyReports = new ArrayList<>();
 
         try{
-            preparedStatement.setInt(1, month);
-            preparedStatement.setInt(2, year);
+            dailyReportsPreparedStatement.setInt(1, month);
+            dailyReportsPreparedStatement.setInt(2, year);
 
-            ResultSet rs = preparedStatement.executeQuery();
-            while (rs.next()){
-                Relatorio r = new Relatorio();
-                r.setCreatedAt(rs.getString("created_at"));
-                r.setInputAnderson(rs.getDouble("input_anderson"));
-                r.setInputBoaIdeia(rs.getDouble("input_boaideia"));
-                r.setInputEmpresa(rs.getDouble("input_empresa"));
-                r.setInputFerronato(rs.getDouble("input_ferronato"));
-                r.setInputJuliana(rs.getDouble("input_juliana"));
-                r.setInputMaxel(rs.getDouble("input_maxel"));
-                r.setInputSagrima(rs.getDouble("input_sagrima"));
-                r.setTotalBilled(rs.getDouble("total_billed"));
-                r.setTotalSold(rs.getDouble("total_sold"));
-                r.setWeightBilled(rs.getDouble("weight_billed"));
+            ResultSet dailyReportsResultSet = dailyReportsPreparedStatement.executeQuery();
+            while (dailyReportsResultSet.next()){
+                DailyReport r = new DailyReport();
+                r.setCreatedAt(dailyReportsResultSet.getString("created_at"));
+                r.setInputAnderson(dailyReportsResultSet.getDouble("input_anderson"));
+                r.setInputBoaIdeia(dailyReportsResultSet.getDouble("input_boaideia"));
+                r.setInputEmpresa(dailyReportsResultSet.getDouble("input_empresa"));
+                r.setInputFerronato(dailyReportsResultSet.getDouble("input_ferronato"));
+                r.setInputJuliana(dailyReportsResultSet.getDouble("input_juliana"));
+                r.setInputMaxel(dailyReportsResultSet.getDouble("input_maxel"));
+                r.setInputSagrima(dailyReportsResultSet.getDouble("input_sagrima"));
+                r.setTotalBilled(dailyReportsResultSet.getDouble("total_billed"));
+                r.setTotalSold(dailyReportsResultSet.getDouble("total_sold"));
+                r.setWeightBilled(dailyReportsResultSet.getDouble("weight_billed"));
 
-                rows.add(r);
+                dailyReports.add(r);
             }
 
         } catch (SQLException throwables){
             System.out.println(throwables.toString());
         }
 
-        System.out.println(rows);
+        System.out.println(dailyReports);
 
-        return rows;
+        MonthlyReport monthlyReport = new MonthlyReport(dailyReports);
+
+        return dailyReports;
     }
 
 
