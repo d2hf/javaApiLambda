@@ -17,10 +17,14 @@ public class DailyReport {
     private double inputAnderson = 0;
     private double inputEmpresa = 0;
     private double inputBoaIdeia = 0;
-    private double inputFerronato;
-    private double inputJuliana;
-    private double inputMaxel;
-    private double inputSagrima;
+    private double inputFerronato = 0;
+    private double inputJuliana = 0;
+    private double inputMaxel = 0;
+    private double inputSagrima = 0;
+    private int quartile1 = 0;
+    private int quartile2 = 0;
+    private int quartile3 = 0;
+    private int quartile4 = 0;
 
 
     public DailyReport(){
@@ -29,7 +33,7 @@ public class DailyReport {
 
     public DailyReport(String createdAt, double totalBilled, double totalSold, double weightBilled, double inputAnderson,
                        double inputEmpresa, double inputBoaIdeia, double inputFerronato, double inputJuliana,
-                       double inputMaxel, double inputSagrima) {
+                       double inputMaxel, double inputSagrima, int quartile1, int quartile2, int quartile3, int quartile4) {
 
         this.createdAt = createdAt;
         this.totalBilled = totalBilled;
@@ -42,6 +46,10 @@ public class DailyReport {
         this.inputJuliana = inputJuliana;
         this.inputMaxel = inputMaxel;
         this.inputSagrima = inputSagrima;
+        this.quartile1 = quartile1;
+        this.quartile2 = quartile2;
+        this.quartile3 = quartile3;
+        this.quartile4 = quartile4;
     }
 
     public String getCreatedAt() {
@@ -130,5 +138,37 @@ public class DailyReport {
 
     public void setInputSagrima(double inputSagrima) {
         this.inputSagrima = inputSagrima;
+    }
+
+    public int getQuartile1() {
+        return quartile1;
+    }
+
+    public void setQuartile1(int quartile1) {
+        this.quartile1 = quartile1;
+    }
+
+    public int getQuartile2() {
+        return quartile2;
+    }
+
+    public void setQuartile2(int quartile2) {
+        this.quartile2 = quartile2;
+    }
+
+    public int getQuartile3() {
+        return quartile3;
+    }
+
+    public void setQuartile3(int quartile3) {
+        this.quartile3 = quartile3;
+    }
+
+    public int getQuartile4() {
+        return quartile4;
+    }
+
+    public void setQuartile4(int quartile4) {
+        this.quartile4 = quartile4;
     }
 }

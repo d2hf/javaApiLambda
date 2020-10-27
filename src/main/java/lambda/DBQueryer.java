@@ -29,11 +29,12 @@ public class DBQueryer {
 
         String query = "INSERT INTO tabela_full " +
                 "(created_at, total_billed, total_sold, weight_billed, input_anderson, input_empresa, " +
-                "input_boaideia, input_ferronato, input_juliana, input_maxel, input_sagrima) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) ON CONFLICT (created_at) DO " +
-                "UPDATE SET (total_billed, total_sold, weight_billed, input_anderson, input_empresa, " +
-                "input_boaideia, input_ferronato, input_juliana, input_maxel, input_sagrima) = " +
-                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "input_boaideia, input_ferronato, input_juliana, input_maxel, input_sagrima, quartile_1" +
+                "quartile_2, quartile_3, quartile_4) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)" +
+                " ON CONFLICT (created_at) DO UPDATE SET (total_billed, total_sold, weight_billed," +
+                " input_anderson, input_empresa, input_boaideia, input_ferronato, input_juliana, input_maxel," +
+                " input_sagrima, quartile_1, quartile_2, quartile_3, quartile_4) = " +
+                "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try {
             PreparedStatement preparedStatement = c.prepareStatement(query);
 
@@ -92,6 +93,10 @@ public class DBQueryer {
                 r.setTotalBilled(dailyReportsResultSet.getDouble("total_billed"));
                 r.setTotalSold(dailyReportsResultSet.getDouble("total_sold"));
                 r.setWeightBilled(dailyReportsResultSet.getDouble("weight_billed"));
+                r.setQuartile1(dailyReportsResultSet.getInt("quartile_1"));
+                r.setQuartile2(dailyReportsResultSet.getInt("quartile_2"));
+                r.setQuartile3(dailyReportsResultSet.getInt("quartile_3"));
+                r.setQuartile4(dailyReportsResultSet.getInt("quartile_4"));
 
                 dailyReports.add(r);
             }
